@@ -47,70 +47,18 @@ class ViewController: UIViewController {
     }
     
     private func getAccount() {
-        let retrier = OAuth2RetryHandler(oauth2: oauth2)
-        sessionManager.adapter = retrier
-        sessionManager.retrier = retrier
+        // code below this line
         
-        let provider = MoyaProvider<CoinbaseServices>(manager: sessionManager)
-        provider.request(.getAccount) { (result) in
-            debugPrint("get coinbase account:\(result.value?.data)")
-            switch result {
-            case let .success(response):
-                do {
-                    let filteredResponse = try response.filterSuccessfulStatusCodes()
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .secondsSince1970
-                    let account = try filteredResponse.map([CoinbaseAccount].self, atKeyPath: "data", using: decoder, failsOnEmptyData: false)
-                    debugPrint("Coinbase account:\(account.first?.balance)")
-                    self.accountLabel.text = account.first?.balance["amount"]
-                }
-                catch let error {
-                    debugPrint("Coinbase account error:\(error)")
-                }
-            case let .failure(error):
-                debugPrint("Coinbase account failure error:\(error)")
-                break
-            }
-        }
-        oauth2.logger = OAuth2DebugLogger(.trace)
     }
     
     private func getUser() {
-        let retrier = OAuth2RetryHandler(oauth2: oauth2)
-        sessionManager.adapter = retrier
-        sessionManager.retrier = retrier
+        // code below this line
         
-        let provider = MoyaProvider<CoinbaseServices>(manager: sessionManager)
-        provider.request(.getUser) { (result) in
-            debugPrint("get coinbase user:\(result)")
-            switch result {
-            case let .success(response):
-                do {
-                    let filteredResponse = try response.filterSuccessfulStatusCodes()
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .secondsSince1970
-                    let user = try filteredResponse.map(CoinbaseUser.self, atKeyPath: "data", using: decoder, failsOnEmptyData: false)
-                    debugPrint("Coinbase user:\(user.name)")
-                    self.userLabel.text = user.name
-                }
-                catch let error {
-                    debugPrint("Coinbase user error:\(error)")
-                }
-            case let .failure(error):
-                debugPrint("Coinbase user failure error:\(error)")
-                break
-            }
-        }
-        oauth2.logger = OAuth2DebugLogger(.trace)
     }
     
     private func authorizeCoinbase() {
-        oauth2.authConfig.authorizeEmbedded = true
-        oauth2.authConfig.authorizeContext = self
-        oauth2.authorize(params: nil) { (json, error) in
-            debugPrint("auth: json:\(json). error: \(String(describing: error))")
-        }
-        oauth2.logger = OAuth2DebugLogger(.trace)
+        // code below this line
+        
     }
 }
 

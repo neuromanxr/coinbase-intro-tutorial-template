@@ -9,43 +9,28 @@
 import Moya
 
 enum CoinbaseServices {
-    case getUser
-    case getAccount
+    // code below this line
+    
 }
 
 extension CoinbaseServices: TargetType {
-    static let baseURLPath = "https://api.coinbase.com"
+    static let baseURLPath = ""
     
     var baseURL: URL { return URL(string: CoinbaseServices.baseURLPath)! }
     var path: String {
-        switch self {
-        case .getUser:
-            return "/v2/user"
-        case .getAccount:
-            return "/v2/accounts"
-        }
+        // code below this line
+        
     }
     var method: Moya.Method {
-        switch self {
-        case .getUser:
-            return .get
-        case .getAccount:
-            return .get
-        }
+        // code below this line
+        
     }
     var task: Task {
-        switch self {
-        case .getUser: // Send no parameters
-            return .requestPlain
-        case .getAccount: // Send no parameters
-            return .requestPlain
-        }
+        // code below this line
+        
     }
     var sampleData: Data {
-        switch self {
-        case .getUser, .getAccount:
-            return "Half measures are as bad as nothing at all.".utf8Encoded
-        }
+        return "Half measures are as bad as nothing at all.".utf8Encode
     }
     var headers: [String: String]? {
         return [
@@ -58,9 +43,7 @@ extension CoinbaseServices: TargetType {
 extension CoinbaseServices: AccessTokenAuthorizable {
     var authorizationType: AuthorizationType {
         switch self {
-        case .getUser, .getAccount:
-            return .none
-        }
+        
     }
 }
 
